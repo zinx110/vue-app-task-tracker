@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <Header title="Task Tracker" />
-        <Tasks v-bind:tasks="tasks" />
+        <Tasks @delete-task="deleteTask" v-bind:tasks="tasks" />
     </div>
 </template>
 <script lang="ts">
@@ -19,6 +19,9 @@ export default defineComponent({
         return {
             tasks: [] as any[],
         };
+    },
+    methods: {
+        deleteTask(id: number) {},
     },
     created() {
         this.tasks = [

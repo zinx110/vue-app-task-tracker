@@ -2,19 +2,27 @@
     <div :class="[task.reminder ? 'reminder' : '', 'task']">
         <h3>
             {{ task.text }}
-            <i class="fas fa-times" />
+            <i @click="onDelete(task.id)" class="fas fa-times" />
         </h3>
         <p>{{ task.day }}</p>
     </div>
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from 'vue';
+export default defineComponent ({
     name: "Task",
     props: {
         task: Object,
     },
-};
+    setup(props,(emit)){
+        const  onDelete=(id: number)=> {
+            emit("delete-task", id);
+        }
+        return onDelete;
+    }
+
+});
 </script>
 
 <style scoped>
@@ -26,6 +34,7 @@ export default {
 }
 i {
     color: red;
+    cursor: pointer;
 }
 h3 {
     display: flex;
